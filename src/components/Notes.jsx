@@ -85,7 +85,13 @@ const Notes = ({ notes = [], setNotes = () => {} }) =>  {
       noteRef.style.left = `${startPosition.x}px`;
       // updatedNotePosition(note.id, startPosition);
 
-      } else {
+      } else if (isOutOfBounds(note)) {
+        // Check if the note is out of viewport bounds
+        noteRef.style.top = `${startPosition.y}px`;
+        noteRef.style.left = `${startPosition.x}px`;
+        // updatedNotePosition(note.id, startPosition);
+
+    } else {
         updatedNotePosition(note.id, newPosition);
       }
     };
@@ -93,6 +99,16 @@ const Notes = ({ notes = [], setNotes = () => {} }) =>  {
     document.addEventListener("mousemove", handleMouseMove);
     document.addEventListener("mouseup", handleMouseUp);
 
+  }
+
+  const isOutOfBounds = (note) => {
+    const currentNoteRef = noteRefs.current[note.id].current;
+    const rect = currentNoteRef.getBoundingClientRect();
+    return (
+        rect.top < 0 || rect.left < 0 ||
+        rect.bottom > window.innerHeight ||
+        rect.right > window.innerWidth
+    );
   }
 
   const checkForOverlap = (note) => {
@@ -110,7 +126,9 @@ const Notes = ({ notes = [], setNotes = () => {} }) =>  {
       const overlap = !(currentRect.right < otherRect.left || 
         otherRect.right < currentRect.left || 
         currentRect.bottom < otherRect.top || 
-        otherRect.bottom < currentRect.top);
+        otherRect.bottom < currentRect.top ||
+        currentNoteRef.contains(otherNoteRef)||
+        otherNoteRef.contains(currentNoteRef));
 
       return overlap;
     });
@@ -131,10 +149,17 @@ const Notes = ({ notes = [], setNotes = () => {} }) =>  {
     localStorage.setItem("localnotes", JSON.stringify(updatedNotes));
   }
 
+
+  const deleteNote = (id) => {
+    const newNotes = notes.filter((n) => n.id !== id);
+    setNotes(newNotes);
+    localStorage.setItem("localnotes", JSON.stringify(newNotes));
+  };
+
   return (
-    <div className="notes">
+    <div className="notes bg-[#0D0D0D] w-screen h-screen">
       {notes.map((note) => (
-        <Note key={note.id} initialPosition={note.position} note={note} content={note.text} setNotes={setNotes} notes={notes} editingRef={editingRef} newRef={noteRefs.current[note.id]?noteRefs.current[note.id]:(noteRefs.current[note.id]=createRef())} 
+        <Note key={note.id} initialPosition={note.position} note={note} content={note.text} setNotes={setNotes} notes={notes} editingRef={editingRef} deleteNote={deleteNote} newRef={noteRefs.current[note.id]?noteRefs.current[note.id]:(noteRefs.current[note.id]=createRef())} 
         onMouseDown={(e)=> handleDragStart(e, note)}
         />
       ))}

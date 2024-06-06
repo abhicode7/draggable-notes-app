@@ -1,6 +1,6 @@
 import React, { useState, useRef, forwardRef, useEffect } from 'react';
 
-const Note = ({ newRef, editingRef, content, setNotes, notes, note, initialPosition = { x: 0, y: 0 }, ...props }, ref) => {
+const Note = ({ newRef, editingRef, deleteNote, content, setNotes, notes, note, initialPosition = { x: 0, y: 0 }, ...props }, ref) => {
   const [isEditing, setIsEditing] = useState(false); // State to track if the note is being edited
   const [noteContent, setNoteContent] = useState(content); // State to track the content of the note
   const inputRef = useRef(null);
@@ -49,7 +49,9 @@ const Note = ({ newRef, editingRef, content, setNotes, notes, note, initialPosit
       onDoubleClick={handleDoubleClick} // Enable editing on double-click
       {...props}
     >
-      📌 
+      <h3 className='absolute top-0 right-2 cursor-pointer' onClick={() => deleteNote(note.id)}>X</h3>
+      📌  
+
       {isEditing ? (
         <input
           ref={inputRef}
