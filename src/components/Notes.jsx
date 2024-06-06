@@ -7,17 +7,18 @@ const Notes = ({ notes = [], setNotes = () => {} }) =>  {
     // Load saved notes from localStorage (if any)
     // localStorage.setItem("localnotes", JSON.stringify(notes));
     const savedNotes = JSON.parse(localStorage.getItem("localnotes"));
+    // console.log(localStorage.getItem("localnotes"));
 
     const updatedNotes = notes.map((note) => {
       // Check if a saved version of the note exists
       const savedNote = savedNotes.find((n) => n.id === note.id);
       if (savedNote && savedNote.position) {
         // If a saved note exists, use it (extend this part to actually use saved data)
-        return {...savedNote, position: savedNote.position};
+        return {...savedNote, position: savedNote.position, text: savedNote.text};
       } else {
         // If no saved note exists, determine a new position
         const position = determinePosition();
-        console.log(position);
+        // console.log(position);
         return { ...note, position };
       }
     });
@@ -39,8 +40,15 @@ const Notes = ({ notes = [], setNotes = () => {} }) =>  {
     };
   };
 
+  const editingRef = useRef(null);
 
   const handleDragStart = (e, note) => {
+
+    if (editingRef.current) {
+      console.log(editingRef.current)
+      return;
+    }
+
     const noteRef = noteRefs.current[note.id].current;
     const rect = noteRef.getBoundingClientRect();
     const offsetX = e.clientX - rect.left;
@@ -48,7 +56,7 @@ const Notes = ({ notes = [], setNotes = () => {} }) =>  {
 
     const startPosition = note.position;
 
-    console.log(offsetX, offsetY);
+    // console.log(offsetX, offsetY);
     // console.log(rect);
 
     const handleMouseMove = (e) => {
@@ -126,7 +134,7 @@ const Notes = ({ notes = [], setNotes = () => {} }) =>  {
   return (
     <div className="notes">
       {notes.map((note) => (
-        <Note key={note.id} initialPosition={note.position} content={note.text} newRef={noteRefs.current[note.id]?noteRefs.current[note.id]:(noteRefs.current[note.id]=createRef())} 
+        <Note key={note.id} initialPosition={note.position} note={note} content={note.text} setNotes={setNotes} notes={notes} editingRef={editingRef} newRef={noteRefs.current[note.id]?noteRefs.current[note.id]:(noteRefs.current[note.id]=createRef())} 
         onMouseDown={(e)=> handleDragStart(e, note)}
         />
       ))}
