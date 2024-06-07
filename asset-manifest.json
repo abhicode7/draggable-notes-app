@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/draggable-notes-app/static/css/main.97057ab7.css",
-    "main.js": "/draggable-notes-app/static/js/main.72ac2ae4.js",
+    "main.js": "/draggable-notes-app/static/js/main.dbb2230a.js",
     "static/js/453.c11d045c.chunk.js": "/draggable-notes-app/static/js/453.c11d045c.chunk.js",
     "index.html": "/draggable-notes-app/index.html",
     "main.97057ab7.css.map": "/draggable-notes-app/static/css/main.97057ab7.css.map",
-    "main.72ac2ae4.js.map": "/draggable-notes-app/static/js/main.72ac2ae4.js.map",
+    "main.dbb2230a.js.map": "/draggable-notes-app/static/js/main.dbb2230a.js.map",
     "453.c11d045c.chunk.js.map": "/draggable-notes-app/static/js/453.c11d045c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.97057ab7.css",
-    "static/js/main.72ac2ae4.js"
+    "static/js/main.dbb2230a.js"
   ]
 }
