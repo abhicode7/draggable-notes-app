@@ -1,7 +1,7 @@
 import './App.css';
 import { useEffect, useState } from 'react';
-import Notes from './components/Notes';
-import notesData from './data/notesData';
+import Notes from './Notes';
+import notesData from './notesData';
 
 function App() {
 

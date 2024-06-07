@@ -1,5 +1,5 @@
 import React, { createRef, useEffect, useRef } from "react";
-import Note from "./components/Note";
+import Note from "./Note";
 
 const Notes = ({ notes = [], setNotes = () => {} }) =>  {
 
