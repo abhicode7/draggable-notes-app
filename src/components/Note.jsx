@@ -9,7 +9,7 @@ const Note = ({ newRef, editingRef, deleteNote, content, setNotes, notes, note, 
     editingRef.current = isEditing;
   }, [isEditing, editingRef]);
   
-  // Function to handle double-click event to enable editing
+  // Function to handle double-click event to enable editing.
   const handleDoubleClick = () => {
     setIsEditing(true);
     
