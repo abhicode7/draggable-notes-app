@@ -4,11 +4,10 @@ import Note from "./Note";
 const Notes = ({ notes = [], setNotes = () => {} }) =>  {
 
   useEffect(() => {
-    // Load saved notes from localStorage (if any)
-    // localStorage.setItem("localnotes", JSON.stringify(notes));
+    
     if (!localStorage.getItem("localnotes")) {
       localStorage.setItem("localnotes", JSON.stringify(notes));
-      // console.log(localStorage.getItem("localnotes"));
+      // If no notes
     }else{
       
       const savedNotes = JSON.parse(localStorage.getItem("localnotes"));
@@ -26,10 +25,10 @@ const Notes = ({ notes = [], setNotes = () => {} }) =>  {
         // console.log(position);
         return { ...note, position };
       }
-    });}
+    });
 
     setNotes(updatedNotes);
-    localStorage.setItem("localnotes", JSON.stringify(updatedNotes));
+    localStorage.setItem("localnotes", JSON.stringify(updatedNotes));}
   }, [notes.length]); // Add setNotes to the dependency array
 
 
