@@ -6,7 +6,12 @@ const Notes = ({ notes = [], setNotes = () => {} }) =>  {
   useEffect(() => {
     // Load saved notes from localStorage (if any)
     // localStorage.setItem("localnotes", JSON.stringify(notes));
-    const savedNotes = JSON.parse(localStorage.getItem("localnotes"));
+    if (!localStorage.getItem("localnotes")) {
+      localStorage.setItem("localnotes", notes);
+      // console.log(localStorage.getItem("localnotes"));
+    }else{
+      
+      const savedNotes = JSON.parse(localStorage.getItem("localnotes"));
     // console.log(localStorage.getItem("localnotes"));
 
     const updatedNotes = notes.map((note) => {
@@ -21,7 +26,7 @@ const Notes = ({ notes = [], setNotes = () => {} }) =>  {
         // console.log(position);
         return { ...note, position };
       }
-    });
+    });}
 
     setNotes(updatedNotes);
     localStorage.setItem("localnotes", JSON.stringify(updatedNotes));
