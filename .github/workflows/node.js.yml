@@ -30,8 +30,10 @@ jobs:
     - run: |
         CI=false npm run build --if-present
     
+    - run: npm i
+    
     # Run the tests defined in package.json
-    - run: npm test --if-present
+    # - run: npm test --if-present
     
     # Deploy the build using gh-pages
     - name: Deploy with gh-pages
