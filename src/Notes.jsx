@@ -7,7 +7,7 @@ const Notes = ({ notes = [], setNotes = () => {} }) =>  {
     // Load saved notes from localStorage (if any)
     // localStorage.setItem("localnotes", JSON.stringify(notes));
     if (!localStorage.getItem("localnotes")) {
-      localStorage.setItem("localnotes", notes);
+      localStorage.setItem("localnotes", JSON.stringify(notes));
       // console.log(localStorage.getItem("localnotes"));
     }else{
       
