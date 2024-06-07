@@ -41,6 +41,11 @@ const Note = ({ newRef, editingRef, deleteNote, content, setNotes, notes, note, 
 
   };
 
+  const submit = (event) => {
+    event.preventDefault();
+    handleBlur();
+  };
+
   return (
     <div
       ref={newRef}
@@ -53,13 +58,14 @@ const Note = ({ newRef, editingRef, deleteNote, content, setNotes, notes, note, 
       📌  
 
       {isEditing ? (
+        <form onSubmit={submit}>
         <input
           ref={inputRef}
           value={noteContent}
           onChange={handleChange}
           onBlur={handleBlur}
           className="w-full bg-yellow-300 border-none outline-none text-xl"
-        />
+        /></form>
       ) : (
         noteContent
       )}
