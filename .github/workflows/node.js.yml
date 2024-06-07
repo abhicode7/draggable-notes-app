@@ -26,11 +26,13 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-     # Set CI environment variable to false to treat warnings as warnings
+     
+    - run: npm i
+
+    # Set CI environment variable to false to treat warnings as warnings
     - run: |
         CI=false npm run build --if-present
     
-    - run: npm i
     
     # Run the tests defined in package.json
     # - run: npm test --if-present
