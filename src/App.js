@@ -12,7 +12,7 @@ function App() {
   }
  
   return (
-    <div className="">
+    <div className="a1">
       <button onClick={onClick} className='absolute top-0 right-1/2 translate-x-1/2 bg-gradient-to-r from-[#C7FF50] to-[#1FC39C] opacity-100 hover:opacity-80 duration-300 active:scale-95 active:opacity-50  px-8 py-3 text-[#073929] font-medium mt-4 rounded z-10'>ADD NOTE 📝</button>
       <Notes notes={notes} setNotes={setNotes} />
     </div>
