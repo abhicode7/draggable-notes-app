@@ -3,7 +3,9 @@ import Note from "./Note";
 
 const Notes = ({ notes, setNotes }) =>  {
 
-  const [initialPositions, setInitialPositions] = useState({}); 
+  // const [initialPositions, setInitialPositions] = useState({}); 
+  // const [position, setPosition] = useState(() => {});
+  // const [check, setCheck] = useState({});
 
   useEffect(() => {
     const savedNotes = localStorage.getItem("localnotes") ? JSON.parse(localStorage.getItem("localnotes")) : notes;
@@ -14,6 +16,8 @@ const Notes = ({ notes, setNotes }) =>  {
         return { ...savedNote, position: savedNote.position, text: savedNote.text };
       } else {
         const position = determinePosition();
+
+        
         return { ...note, position: position };
       }
     });
@@ -110,6 +114,7 @@ const Notes = ({ notes, setNotes }) =>  {
   const checkForOverlap = (note) => {
     // Check for overlap
     const currentNoteRef = noteRefs.current[note.id].current;
+    if (!currentNoteRef) return false;
     const currentRect = currentNoteRef.getBoundingClientRect();
 
     return notes.some((n) => {
@@ -117,6 +122,8 @@ const Notes = ({ notes, setNotes }) =>  {
         return false;
       }
       const otherNoteRef = noteRefs.current[n.id].current;
+      if (!otherNoteRef) return false;
+
       const otherRect = otherNoteRef.getBoundingClientRect();
 
       const overlap = !(currentRect.right < otherRect.left || 

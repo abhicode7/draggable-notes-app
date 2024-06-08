@@ -14,6 +14,10 @@ function App() {
     setNotes([...notes, { id: Date.now(), text: "New Note", position: determinePosition() }]);
   };
 
+  useEffect(() => {
+    localStorage.setItem("localnotes", JSON.stringify(notes));
+  }, [notes]);
+
   const determinePosition = () => {
     const maxWidth = window.innerWidth - 350;
     const maxHeight = window.innerHeight - 350;
