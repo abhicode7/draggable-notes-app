@@ -31,7 +31,7 @@ const Notes = ({ notes = [], setNotes = () => {} }) =>  {
 
     setNotes(updatedNotes);
     localStorage.setItem("localnotes", JSON.stringify(updatedNotes));}
-  }, [notes.length]); // Add setNotes to the dependency array
+  }, [notes.length, position]); // Add setNotes to the dependency array
 
 
   const noteRefs = useRef([]);
