@@ -5,6 +5,15 @@ const Note = ({ newRef, editingRef, deleteNote, content, setNotes, notes, note, 
   const [noteContent, setNoteContent] = useState(content); // State to track the content of the note
   const inputRef = useRef(null);
 
+  // const [initialPosition, setInitialPosition] = useState(() => {
+  //   const maxWidth = window.innerWidth - 350;
+  //   const maxHeight = window.innerHeight - 350;
+  //   return {
+  //     x: Math.floor(Math.random() * maxWidth),
+  //     y: Math.floor(Math.random() * maxHeight),
+  //   };
+  // });
+
   useEffect(() => {
     editingRef.current = isEditing;
   }, [isEditing, editingRef]);

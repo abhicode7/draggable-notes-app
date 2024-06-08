@@ -1,37 +1,27 @@
-import React, { createRef, useEffect, useRef } from "react";
+import React, { createRef, useEffect, useRef, useState } from "react";
 import Note from "./Note";
 
-const Notes = ({ notes = [], setNotes = () => {} }) =>  {
+const Notes = ({ notes, setNotes }) =>  {
+
+  const [initialPositions, setInitialPositions] = useState({}); 
 
   useEffect(() => {
+    const savedNotes = localStorage.getItem("localnotes") ? JSON.parse(localStorage.getItem("localnotes")) : notes;
     
-    if (!localStorage.getItem("localnotes")) {
-      localStorage.setItem("localnotes", JSON.stringify(notes));
-      // If no notes then do this.
-    }else{
-      
-      const savedNotes = localStorage.getItem("localnotes") 
-      ? JSON.parse(localStorage.getItem("localnotes")) 
-      : JSON.stringify(notes);
-    // console.log(localStorage.getItem("localnotes"));
-
     const updatedNotes = notes.map((note) => {
-      // Check if a saved version of the note exists
       const savedNote = savedNotes.find((n) => n.id === note.id);
       if (savedNote && savedNote.position) {
-        // If a saved note exists, use it (extend this part to actually use saved data)
-        return {...savedNote, position: savedNote.position, text: savedNote.text};
+        return { ...savedNote, position: savedNote.position, text: savedNote.text };
       } else {
-        // If no saved note exists, determine a new position
         const position = determinePosition();
-        // console.log(position);
-        return { ...note, position };
+        return { ...note, position: position };
       }
     });
 
     setNotes(updatedNotes);
-    localStorage.setItem("localnotes", JSON.stringify(updatedNotes));}
-  }, [notes]); // Add setNotes to the dependency array
+    localStorage.setItem("localnotes", JSON.stringify(updatedNotes));
+  }, []); // Run only on initial mount
+
 
 
   const noteRefs = useRef([]);
