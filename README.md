@@ -5,7 +5,7 @@ This is a dynamic, interactive web application that allows users to create, drag
 [Live Preview](https://abhicode7.github.io/draggable-notes-app/)
 
 <p align="center">
-  <img src="https://github.com/abhicode7/draggable-notes-app/assets/63244430/eb2ca82d-3348-4ea3-b32f-443144431371" alt="Project Demo">
+  <img src="https://github.com/abhicode7/draggable-notes-app/assets/87370756/5de7ee61-5f76-4e08-9541-e61d4d2c9939" alt="Project Demo">
 </p>
 
 ## ✨ Features
